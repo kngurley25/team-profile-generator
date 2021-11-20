@@ -4,6 +4,11 @@ test("creates an employee object", () => {
     const employee = new Employee ("John");
 
     expect(employee.name).toBe("John");
-    // expect(employee.Id).toBe("10");
+    expect(employee.email).toBe("email");
+})
 
+test("creates an employee object", () => {
+    const employee = new Employee ("John");
+    
+    expect(employee.email).toBe("email");
 })
