@@ -1,65 +1,80 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+const generatePage = require("./src/page-template");
+
 const Employee = require("./lib/Employee");
-new Employee().getName();
+const Engineer = require("./lib/Engineer")
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
 
-const generatedPage = require("./src/page-template");
+const promptManager = () => {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter team manager name."
+        },
+        {
+            type: "input",
+            name: "Id",
+            message: "Enter team manager employee ID number.",
+        },
+        {
+           type: "input",
+           name: "email",
+           message: "Enter team manager email address." 
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "Enter team manager office number."
+        }
+    ])
+}
 
-// const promptManager = () => {
-//     return inquirer.prompt([
-//         {
-//             type: "input",
-//             name: "name",
-//             message: "Enter team manager name."
-//         },
-//         {
-//             type: "input",
-//             name: "Id",
-//             message: "Enter team manager employee ID number.",
-//         },
-//         {
-//            type: "input",
-//            name: "email",
-//            message: "Enter team manager email address." 
-//         },
-//         {
-//             type: "input",
-//             name: "officeNumber",
-//             message: "Enter team manager office number."
-//         }
-//     ])
-// }
+const promptEmployeeAdd = () => {   
+    console.log(`
+    ADD NEW EMPLOYEE
+    `);
 
-// const promptEmployeeAdd = () => {   
-//     console.log(`
-//     ADD NEW EMPLOYEE
-//     `);
+    inquirer.prompt({
+        type: "list",
+        name: "employeeType",
+        message: "Which employee position type would you like to add?",
+        choices: [
+            "Manager",
+            "Engineer",
+            "Intern",
+            "I do not want to add another employee"
+        ]
+    })
+    .then(({ employeeType }) => {
+        if (employeeType === "I do not want to add another employee") {
+            return;
+        } else {
+            console.log("Add information for: " + employeeType);
+            new Employee(employeeType).getName();
+        }
+    })
+}
 
-//     inquirer.prompt({
-//         type: "list",
-//         name: "confirmEmployeeType",
-//         message: "Which employee position type would you like to add?",
-//         choices: [
-//             "Manager",
-//             "Engineer",
-//             "Intern",
-//             "I do not want to add another employee"
-//         ]
-//     })
-//     .then((answer) => {
-//         console.log(answer);
-//     })
-// }
+promptManager()
+    .then(promptEmployeeAdd)
+    // .then(pageHTML => {
+    //     return writeFile(pageHTML);
+    // })
 
 
-// promptManager()
-//     .then(promptEmployeeAdd)
+// const writeFile = () => {
 
-// function createFile() {
-//     fs.writeFile(path.join("./", "dist", "index.html"), generatedPage,
-//             (err) => {
-//                 if (err) throw err;
-//                 console.log("The file has been saved.");
-//             })
+//     const generatedHtml = generatePage(team);
+
+//     fs.writeFile("index.html", generatedHtml,
+//         (err) => {
+//             if (err) throw err;
+//             else {
+//                 console.log("File written successfully.");
+//             }
+//         })
 // }
