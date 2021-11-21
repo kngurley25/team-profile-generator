@@ -5,11 +5,14 @@ const generatePage = require("./src/page-template");
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Inter = require("./lib/Intern");
 
 const questions = require("./utils/questions");
 const managerQuestions = require("./utils/managerQuestions");
 const engineerQuestions = require("./utils/engineerQuestions");
 const internQuestions = require("./utils/internQuestions");
+const Intern = require("./lib/Intern");
 
 const employeeArr = [];
 
@@ -41,9 +44,6 @@ const promptManager = () => {
         console.log(managerAnswers);
         employeeArr.push(employee);
         console.log(employeeArr);
-        console.log(`
-        ADD NEW EMPLOYEE
-        `);
         promptEmployeeAdd();
     })
 }
@@ -57,7 +57,10 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        employeeArr.push(promptAnswers);
+                        const employee = new Manager(promptAnswers);
+                        employeeArr.push(employee);
+                        console.log(employeeArr);
+                        promptEmployeeAdd();
                     })
             }
             if (answers.employeeType === "Engineer") {
@@ -65,7 +68,10 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        employeeArr.push(promptAnswers);
+                        const employee = new Engineer(promptAnswers);
+                        employeeArr.push(employee);
+                        console.log(employeeArr);
+                        promptEmployeeAdd();
                     })
             }
             if (answers.employeeType === "Intern") {
@@ -73,7 +79,10 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        employeeArr.push(promptAnswers);
+                        const employee = new Intern(promptAnswers);
+                        employeeArr.push(employee);
+                        console.log(employeeArr);
+                        promptEmployeeAdd();
                     })
             }
             if (answers.employeeType === "NONE") {
