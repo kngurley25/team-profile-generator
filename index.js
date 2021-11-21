@@ -53,8 +53,8 @@ const promptEmployeeAdd = () => {
         if (employeeType === "I do not want to add another employee") {
             return;
         } else {
-            console.log("Add information for: " + employeeType);
-            new Employee(employeeType).getName();
+            const employee = new Employee();
+            console.log(employee);
         }
     })
 }
