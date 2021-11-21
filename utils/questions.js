@@ -24,14 +24,6 @@ const questions = [
         type: "input",
         name: "id",
         message: "Enter employee ID number.",
-        validate: id => {
-            if (isNaN(id)) {
-                console.log("Enter a valid ID number.")
-                return false;
-            } else {
-                return true;
-            }
-        }
     },
     {
         type: "input",

@@ -3,11 +3,13 @@ const inquirer = require("inquirer");
 
 const generatePage = require("./src/page-template");
 
+const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 
 const questions = require("./utils/questions");
 const managerQuestions = require("./utils/managerQuestions");
-const Employee = require("./lib/Employee");
+const engineerQuestions = require("./utils/engineerQuestions");
+const internQuestions = require("./utils/internQuestions");
 
 const employeeArr = [];
 
@@ -35,8 +37,10 @@ const promptManager = () => {
         }
     ])
     .then(managerAnswers => {
-        const manager = new Manager(managerAnswers);
-        employeeArr.push(manager);
+        const employee = new Manager(managerAnswers);
+        console.log(managerAnswers);
+        employeeArr.push(employee);
+        console.log(employeeArr);
         console.log(`
         ADD NEW EMPLOYEE
         `);
@@ -49,14 +53,12 @@ const promptEmployeeAdd = () => {
         .then(answers => {
             const employee = new Employee(answers);
             employeeArr.push(employee);
+            console.log(employeeArr);
         })
 }
 
 promptManager()
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
-    // })
-
+//     .then(writeFile);
 
 // const writeFile = () => {
 
