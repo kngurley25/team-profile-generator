@@ -51,14 +51,38 @@ const promptManager = () => {
 const promptEmployeeAdd = () => {
     inquirer.prompt(questions)
         .then(answers => {
-            const employee = new Employee(answers);
-            employeeArr.push(employee);
-            console.log(employeeArr);
+            let promptAnswers = answers;
+            if (answers.employeeType === "Manager") {
+                inquirer.prompt(managerQuestions)
+                    .then(answer => {
+                        let newAnswer = answer;
+                        promptAnswers = {...promptAnswers, ...newAnswer};
+                        employeeArr.push(promptAnswers);
+                    })
+            }
+            if (answers.employeeType === "Engineer") {
+                inquirer.prompt(engineerQuestions)
+                    .then(answer => {
+                        let newAnswer = answer;
+                        promptAnswers = {...promptAnswers, ...newAnswer};
+                        employeeArr.push(promptAnswers);
+                    })
+            }
+            if (answers.employeeType === "Intern") {
+                inquirer.prompt(internQuestions)
+                    .then(answer => {
+                        let newAnswer = answer;
+                        promptAnswers = {...promptAnswers, ...newAnswer};
+                        employeeArr.push(promptAnswers);
+                    })
+            }
+            if (answers.employeeType === "NONE") {
+                return;
+            }
         })
 }
 
 promptManager()
-//     .then(writeFile);
 
 // const writeFile = () => {
 

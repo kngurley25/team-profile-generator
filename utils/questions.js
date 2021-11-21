@@ -7,30 +7,9 @@ const questions = [
             "Manager",
             "Engineer",
             "Intern",
-            "I do not want to add another employee"
+            "NONE"
         ],
-        validate: employeeType => {
-            if (employeeType === "I do not want to add another employee") {
-                return;
-            }
-        }
-    },
-    {
-        type: "input",
-        name: "name",
-        message: "Enter name."
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "Enter employee ID number.",
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter email address."
-    },
-    
+    }, 
 ]
 
 module.exports = questions;
