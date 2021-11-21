@@ -5,7 +5,10 @@ const generatePage = require("./src/page-template");
 
 const Manager = require("./lib/Manager");
 
-const inquirerQuestions = require("./utils/questions");
+const questions = require("./utils/questions");
+const managerQuestions = require("./utils/managerQuestions");
+const Employee = require("./lib/Employee");
+
 const employeeArr = [];
 
 const promptManager = () => {
@@ -34,44 +37,20 @@ const promptManager = () => {
     .then(managerAnswers => {
         const manager = new Manager(managerAnswers);
         employeeArr.push(manager);
-        console.log(employeeArr);
+        console.log(`
+        ADD NEW EMPLOYEE
+        `);
         promptEmployeeAdd();
     })
 }
 
 const promptEmployeeAdd = () => {
-    inquirer.prompt(inquirerQuestions)
+    inquirer.prompt(questions)
         .then(answers => {
-            employeeArr.push(answers);
-            console.log(employeeArr);
+            const employee = new Employee(answers);
+            employeeArr.push(employee);
         })
 }
-
-// const promptEmployeeAdd = () => {   
-//     console.log(`
-//     ADD NEW EMPLOYEE
-//     `);
-
-//     inquirer.prompt({
-//         type: "list",
-//         name: "employeeType",
-//         message: "Which employee position type would you like to add?",
-//         choices: [
-//             "Manager",
-//             "Engineer",
-//             "Intern",
-//             "I do not want to add another employee"
-//         ]
-//     })
-//     .then(({ employeeType }) => {
-//         if (employeeType === "I do not want to add another employee") {
-//             return;
-//         } else {
-//             const employee = new Manager();
-//             employee.getName();
-//         }
-//     })
-// }
 
 promptManager()
     // .then(pageHTML => {
