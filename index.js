@@ -44,7 +44,7 @@ const promptManager = () => {
         }
     ])
     .then(managerAnswers => {
-        const employee = new Manager(managerAnswers);
+        const employee = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
         // console.log(managerAnswers);
         employeeArr.push(employee);
         // console.log(employeeArr);
@@ -61,7 +61,7 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        const employee = new Manager(promptAnswers);
+                        const employee = new Manager(promptAnswers.name, promptAnswers.id, promptAnswers.email, promptAnswers.officeNumber);
                         employeeArr.push(employee);
                         // console.log(employeeArr);
                         promptEmployeeAdd();
@@ -72,7 +72,7 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        const employee = new Engineer(promptAnswers);
+                        const employee = new Engineer(promptAnswers.name, promptAnswers.id, promptAnswers.email, promptAnswers.github);
                         employeeArr.push(employee);
                         // console.log(employeeArr);
                         promptEmployeeAdd();
@@ -83,7 +83,7 @@ const promptEmployeeAdd = () => {
                     .then(answer => {
                         let newAnswer = answer;
                         promptAnswers = {...promptAnswers, ...newAnswer};
-                        const employee = new Intern(promptAnswers);
+                        const employee = new Intern(promptAnswers.name, promptAnswers.id, promptAnswers.email, promptAnswers.school);
                         employeeArr.push(employee);
                         // console.log(employeeArr);
                         promptEmployeeAdd();
