@@ -1,21 +1,25 @@
+// npm packages
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+// HTML with template literals
 const generatePage = require("./src/page-template");
 
-const Employee = require("./lib/Employee");
+// Constructor classes
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-const Inter = require("./lib/Intern");
+const Intern = require("./lib/Intern");
 
+// Employee prompted questions
 const questions = require("./utils/questions");
 const managerQuestions = require("./utils/managerQuestions");
 const engineerQuestions = require("./utils/engineerQuestions");
 const internQuestions = require("./utils/internQuestions");
-const Intern = require("./lib/Intern");
 
+// array to store team info from prompts
 const employeeArr = [];
 
+// initial manager minimum added team member
 const promptManager = () => {
     inquirer.prompt([
         {
@@ -41,9 +45,9 @@ const promptManager = () => {
     ])
     .then(managerAnswers => {
         const employee = new Manager(managerAnswers);
-        console.log(managerAnswers);
+        // console.log(managerAnswers);
         employeeArr.push(employee);
-        console.log(employeeArr);
+        // console.log(employeeArr);
         promptEmployeeAdd();
     })
 }
@@ -59,7 +63,7 @@ const promptEmployeeAdd = () => {
                         promptAnswers = {...promptAnswers, ...newAnswer};
                         const employee = new Manager(promptAnswers);
                         employeeArr.push(employee);
-                        console.log(employeeArr);
+                        // console.log(employeeArr);
                         promptEmployeeAdd();
                     })
             }
@@ -70,7 +74,7 @@ const promptEmployeeAdd = () => {
                         promptAnswers = {...promptAnswers, ...newAnswer};
                         const employee = new Engineer(promptAnswers);
                         employeeArr.push(employee);
-                        console.log(employeeArr);
+                        // console.log(employeeArr);
                         promptEmployeeAdd();
                     })
             }
@@ -81,7 +85,7 @@ const promptEmployeeAdd = () => {
                         promptAnswers = {...promptAnswers, ...newAnswer};
                         const employee = new Intern(promptAnswers);
                         employeeArr.push(employee);
-                        console.log(employeeArr);
+                        // console.log(employeeArr);
                         promptEmployeeAdd();
                     })
             }
@@ -91,8 +95,10 @@ const promptEmployeeAdd = () => {
         })  
 }
 
+// initialize app
 promptManager();
 
+// create HTML file in dist folder
 const writeFile = employeeArr => {
 
     const generatedHtml = generatePage(employeeArr);
