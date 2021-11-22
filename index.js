@@ -86,22 +86,28 @@ const promptEmployeeAdd = () => {
                     })
             }
             if (answers.employeeType === "NONE") {
-                return;
+                writeFile(employeeArr);
             }
-        })
+        })  
 }
 
-promptManager()
+promptManager();
 
-// const writeFile = () => {
+const writeFile = employeeArr => {
 
-//     const generatedHtml = generatePage(employeeArr);
+    const generatedHtml = generatePage(employeeArr);
 
-//     fs.writeFile("index.html", generatedHtml,
-//         (err) => {
-//             if (err) throw err;
-//             else {
-//                 console.log("File written successfully.");
-//             }
-//         })
-// }
+    return new Promise((resolve, reject) => {
+      fs.writeFile('./dist/index.html', generatedHtml, err => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        console.log("File has been created");
+        resolve({
+          ok: true,
+          message: 'File created!'
+        });
+      });
+    });
+  };
